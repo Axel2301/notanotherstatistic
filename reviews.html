@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - Just Another Statistic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        /* Award Banner */
+        .award-banner {
+            background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.3);
+        }
+
+        .award-banner h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .award-banner .stars {
+            font-size: 2em;
+            margin: 10px 0;
+        }
+
+        /* Professional Review Section */
+        .professional-reviews {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .professional-reviews h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .review-card {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .review-source {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stars {
+            color: #f39c12;
+            font-size: 1.5em;
+        }
+
+        .review-text {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .review-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .review-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Amazon Reviews Section */
+        .amazon-reviews {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .amazon-reviews h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .customer-review {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .customer-review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .review-date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .customer-review-text {
+            color: #555;
+            line-height: 1.7;
+            margin-top: 10px;
+        }
+
+        .verified-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .amazon-link-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 30px;
+            background: #fff3cd;
+            border-radius: 10px;
+        }
+
+        .amazon-link-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .amazon-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .amazon-button {
+            display: inline-block;
+            background: #ff9900;
+            color: #111;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .amazon-button:hover {
+            background: #ffb84d;
+        }
+
+        /* Testimonial Form Section */
+        .testimonial-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .testimonial-section h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .testimonial-section .intro {
+            text-align: center;
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .testimonial-form {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Georgia', serif;
+            font-size: 1em;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 10px;
+            font-size: 2em;
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        .star-rating label {
+            cursor: pointer;
+            color: #ddd;
+            transition: color 0.3s;
+        }
+
+        .star-rating input[type="radio"]:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f39c12;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .form-note {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 15px;
+                font-size: 0.9em;
+            }
+
+            .page-header,
+            .professional-reviews,
+            .amazon-reviews,
+            .testimonial-section {
+                padding: 30px;
+            }
+
+            .page-header h1 {
+                font-size: 2em;
+            }
+
+            .professional-reviews h2,
+            .amazon-reviews h2,
+            .testimonial-section h2 {
+                font-size: 1.8em;
+            }
+
+            .review-header,
+            .customer-review-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .amazon-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Just Another Statistic</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Reader Reviews</h1>
+            <p class="subtitle">What readers and critics are saying</p>
+        </div>
+
+        <!-- Award Banner -->
+        <div class="award-banner">
+            <h2>🏆 Literary Titan Silver Award Winner 🏆</h2>
+            <div class="stars">★★★★★</div>
+            <p>Recognized for excellence in memoir writing</p>
+        </div>
+
+        <!-- Professional Reviews -->
+        <div class="professional-reviews">
+            <h2>Professional Reviews</h2>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-source">Literary Titan - Silver Award</div>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <p class="review-text">"Just Another Statistic follows Axel Reid's long, confusing, and often frightening medical journey as he battles invisible autoimmune disease while navigating a healthcare system that keeps misreading the clues."</p>
+                <p class="review-text">"I found myself drawn into the rawness of the author's voice. There's no polish, no tidy narrative arcs, and that's what makes it hit harder. The repetition and spiraling thoughts, especially in the sections where the illness affects his cognition, gave me a weird cocktail of sympathy and discomfort."</p>
+                <p class="review-text">"The author writes the way someone thinks when they're scared and exhausted... It's messy in a way that feels honest. Some chapters had me sitting back, just letting the weight of it settle, especially when he describes moments where his mind simply stops working. These parts aren't dramatic. They're just unsettling, and that simplicity made them powerful."</p>
+                <p class="review-text">"I'd recommend this memoir to anyone who wants to understand autoimmune disease beyond medical definitions, and to readers who appreciate raw, unfiltered life narratives. It's especially powerful for anyone who's been dismissed by doctors or felt lost in a system that values test results over lived experience."</p>
+                <a href="https://literarytitan.com/2025/11/27/just-another-statistic/" class="review-link" target="_blank">Read the full review →</a>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-source">Literary Titan Author Interview</div>
+                </div>
+                <p class="review-text">In-depth interview with Axel Reid discussing the challenges of writing during active illness, the importance of documenting medical negligence, and what medical professionals can learn from patient experiences.</p>
+                <a href="https://literarytitan.com/2025/11/28/cheated-by-the-system/" class="review-link" target="_blank">Read the full interview →</a>
+            </div>
+        </div>
+
+        <!-- Amazon Reviews -->
+        <div class="amazon-reviews">
+            <h2>Reader Reviews from Amazon</h2>
+            
+            <div class="customer-review">
+                <div class="customer-review-header">
+                    <div>
+                        <span class="reviewer-name">Dr Jane</span>
+                        <span class="verified-badge">Verified Purchase</span>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="review-date">2 December 2025 - Kindle Edition</div>
+                <p class="customer-review-text"><strong>Highly recommended</strong><br>I was genuinely struck by this account. The author's unpolished, honest writing style offers an intimate window into the progression of their illness, allowing the reader to feel closely connected to their experience. The rawness of the narrative conveys not only the personal horrors that severe illness can bring, but also the resilience and compassion that shine through despite it all. Despite the heaviness of the subject matter, it's remarkably readable and incredibly difficult to put down. A powerful and deeply human story—highly recommended.</p>
+            </div>
+
+            <div class="customer-review">
+                <div class="customer-review-header">
+                    <div>
+                        <span class="reviewer-name">Mrs Jane Clarke</span>
+                        <span class="verified-badge">Verified Purchase</span>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="review-date">2 December 2025 - Kindle Edition</div>
+                <p class="customer-review-text"><strong>An excellent account of one man's battle to uncover the truth about his health</strong><br>A genuine and heartfelt account from a truly honest man who tells his story without bitterness. A gripping account of one man's long, frustrating search for answers in a complicated healthcare system. The story is clearly told and holds your attention as he uncovers mistakes and encounters a system that quickly protected itself once those errors came to light.</p>
+            </div>
+
+            <div class="customer-review">
+                <div class="customer-review-header">
+                    <div>
+                        <span class="reviewer-name">Julia</span>
+                        <span class="verified-badge">Verified Purchase</span>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="review-date">5 December 2025 - Paperback</div>
+                <p class="customer-review-text"><strong>A must-read</strong><br>A very moving account of the challenges that often face patients in the UK healthcare system and their damaging effects on the patient's journey to diagnosis. Despite some of the horrors described, the writer somehow still retains an air of brio and hope for the future. A must-read.</p>
+            </div>
+
+            <div class="customer-review">
+                <div class="customer-review-header">
+                    <div>
+                        <span class="reviewer-name">Vittoria Bianchi</span>
+                        <span class="verified-badge">Verified Purchase</span>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="review-date">3 December 2025 - Paperback</div>
+                <p class="customer-review-text"><strong>Amazing book</strong><br>I enjoy reading books centred on the medical world but this one went much deeper, you can really put yourself in the author's shoes and almost feel what he goes through. Recommending to anyone who's interested in the medical field or wants to read a very interesting memoir.</p>
+            </div>
+
+            <div class="customer-review">
+                <div class="customer-review-header">
+                    <div>
+                        <span class="reviewer-name">Amazon Customer</span>
+                        <span class="verified-badge">Verified Purchase</span>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="review-date">31 October 2025 - Paperback</div>
+                <p class="customer-review-text"><strong>Honest and raw story of one man's quest for a diagnosis and accountability</strong><br>This is a well written and interesting journey of one man's challenge to attain a diagnosis in a complex medical environment which closed ranks when errors were exposed.</p>
+            </div>
+
+            <div class="amazon-link-section">
+                <h3>Leave a Review on Amazon</h3>
+                <p>Read the book? Please leave an honest review on your local Amazon marketplace:</p>
+                <div class="amazon-links">
+                    <a href="https://www.amazon.co.uk/dp/1919274154" class="amazon-button" target="_blank">Amazon UK</a>
+                    <a href="https://www.amazon.com/dp/1919274154" class="amazon-button" target="_blank">Amazon US</a>
+                    <a href="https://www.amazon.ca/dp/1919274154" class="amazon-button" target="_blank">Amazon Canada</a>
+                    <a href="https://www.amazon.com.au/dp/1919274154" class="amazon-button" target="_blank">Amazon Australia</a>
+                    <a href="https://www.amazon.de/dp/1919274154" class="amazon-button" target="_blank">Amazon Germany</a>
+                    <a href="https://www.amazon.fr/dp/1919274154" class="amazon-button" target="_blank">Amazon France</a>
+                    <a href="https://www.amazon.es/dp/1919274154" class="amazon-button" target="_blank">Amazon Spain</a>
+                    <a href="https://www.amazon.it/dp/1919274154" class="amazon-button" target="_blank">Amazon Italy</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonial Form -->
+        <div class="testimonial-section">
+            <h2>Share Your Thoughts</h2>
+            <p class="intro">Can't review on Amazon? Share your feedback here and it may be featured on this page.</p>
+            
+            <form class="testimonial-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name or use initials for privacy">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Rating *</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" required>
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="review">Your Review *</label>
+                    <textarea id="review" name="review" required placeholder="Share your thoughts about the book..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location (Optional)</label>
+                    <input type="text" id="location" name="location" placeholder="City, Country">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="consent" required>
+                        I agree that my review may be featured on this website
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">Submit Review</button>
+
+                <div class="form-note">
+                    <strong>Note:</strong> Your email will not be published. Reviews are moderated and may be edited for length. If you purchased from Amazon, we encourage you to also leave a review there as it helps other readers discover the book.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Star rating hover effect
+        const starRating = document.querySelector('.star-rating');
+        const stars = starRating.querySelectorAll('label');
+        
+        stars.forEach((star, index) => {
+            star.addEventListener('mouseenter', () => {
+                stars.forEach((s, i) => {
+                    if (i >= index) {
+                        s.style.color = '#f39c12';
+                    }
+                });
+            });
+        });
+
+        starRating.addEventListener('mouseleave', () => {
+            const checked = starRating.querySelector('input:checked');
+            stars.forEach((s, i) => {
+                if (!checked || i >= Array.from(stars).indexOf(checked.nextElementSibling)) {
+                    s.style.color = '#ddd';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

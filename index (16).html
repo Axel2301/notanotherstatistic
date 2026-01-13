@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Another Statistic - A Lupus Survival Story</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .book-cover {
+            text-align: center;
+        }
+        
+        .book-cover img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .book-info h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+        
+        .book-info .subtitle {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .book-info .description {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .book-info .description strong {
+            color: #2c3e50;
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .book-info ul {
+            margin: 15px 0 15px 30px;
+            font-size: 1.05em;
+        }
+
+        .book-info ul li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.3em;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+        }
+        
+        .price {
+            font-size: 1.8em;
+            color: #27ae60;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .price-note {
+            font-size: 0.9em;
+            color: #e74c3c;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin-top: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .reviews h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .review-card {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .review-source {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stars {
+            color: #f39c12;
+            font-size: 1.5em;
+        }
+
+        .review-quote {
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .review-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .review-link:hover {
+            text-decoration: underline;
+        }
+        
+        .about-author {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin-top: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .about-author h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .about-author p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 15px;
+                font-size: 0.9em;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+            
+            .book-info h1 {
+                font-size: 2em;
+            }
+            
+            .about-author, .reviews {
+                padding: 30px;
+            }
+
+            .review-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Just Another Statistic</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <div class="book-cover">
+                <img src="book-cover.jpg" alt="Just Another Statistic Book Cover">
+            </div>
+            
+            <div class="book-info">
+                <h1>Just Another Statistic</h1>
+                <p class="subtitle">Battling Invisible Autoimmune Illness and Visible Medical Failure</p>
+                
+                <div class="description">
+                    <p><strong>After 18 months of misdiagnosis, Axel Reid nearly died from the disease he actually had: Systemic Lupus.</strong></p>
+                    
+                    <p>Imagine trusting doctors with your life, only to discover they ignored critical blood tests, dismissed clear symptoms, and covered up their mistakes. This is the true story of a 28-year-old London trader whose mysterious illness baffled doctors, triggered life-threatening reactions to the wrong medications, and exposed shocking failures in private healthcare.</p>
+                    
+                    <p><strong>What you'll discover:</strong></p>
+                    <ul>
+                        <li>Blood test results that clearly showed lupus—ignored for 18 months</li>
+                        <li>Specialist recommendations that were never followed</li>
+                        <li>Medical records that mysteriously disappeared</li>
+                        <li>A legal battle that exposed how the system protects its own</li>
+                        <li>The devastating reality of living with undiagnosed autoimmune disease</li>
+                    </ul>
+                    
+                    <p><strong>Was negligence involved? YOU be the judge.</strong></p>
+                    
+                    <p>After reading, cast your vote on whether justice was served. See what thousands of other readers think at the link provided in the book.</p>
+                    
+                    <p style="margin-top: 20px;"><em>For autoimmune patients, medical professionals, and anyone who's ever felt dismissed by the healthcare system.</em></p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <p style="font-size: 1.2em; font-weight: bold; color: #2c3e50; margin-bottom: 20px;">Available on Amazon Worldwide:</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; max-width: 800px; margin: 0 auto;">
+                        <a href="https://www.amazon.co.uk/dp/1919274154" class="cta-button" style="padding: 15px 30px; font-size: 1em;">🇬🇧 Amazon UK</a>
+                        <a href="https://www.amazon.com/dp/1919274154" class="cta-button" style="padding: 15px 30px; font-size: 1em;">🇺🇸 Amazon US</a>
+                        <a href="https://www.amazon.ca/dp/1919274154" class="cta-button" style="padding: 15px 30px; font-size: 1em;">🇨🇦 Amazon CA</a>
+                        <a href="https://www.amazon.com.au/dp/1919274154" class="cta-button" style="padding: 15px 30px; font-size: 1em;">🇦🇺 Amazon AU</a>
+                        <a href="https://www.amazon.de/dp/1919274154" class="cta-button" style="padding: 15px 30px; font-size: 1em;">🇩🇪 Amazon DE</a>
+                        <a href="https://www.amazon.fr/dp/1919274154" class="cta-button" style="padding: 15px 30px; font-size: 1em;">🇫🇷 Amazon FR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Award Banner -->
+        <div style="background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%); border-radius: 20px; padding: 40px; margin-top: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center;">
+            <div style="font-size: 3em; margin-bottom: 10px;">🥈</div>
+            <h2 style="font-size: 2.5em; color: #2c3e50; margin-bottom: 20px;">Literary Titan Silver Book Award Winner</h2>
+            <p style="font-size: 1.3em; color: #555; margin-bottom: 30px;">Recognised for excellence in memoir writing</p>
+            <a href="reviews.html" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 50px; font-size: 1.3em; text-decoration: none; border-radius: 50px; font-weight: bold; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);">View All Reviews</a>
+        </div>
+
+        <div class="reviews">
+            <h2>Featured in Literary Titan</h2>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-source">5-Star Book Review</div>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <p class="review-quote">"Just Another Statistic follows Axel Reid's long, confusing, and often frightening medical journey as he battles invisible autoimmune disease while navigating a healthcare system that keeps misreading the clues."</p>
+                <p class="review-quote">"I found myself drawn into the rawness of the author's voice. There's no polish, no tidy narrative arcs, and that's what makes it hit harder. The repetition and spiraling thoughts, especially in the sections where the illness affects his cognition, gave me a weird cocktail of sympathy and discomfort."</p>
+                <p class="review-quote">"The author writes the way someone thinks when they're scared and exhausted... It's messy in a way that feels honest. Some chapters had me sitting back, just letting the weight of it settle, especially when he describes moments where his mind simply stops working. These parts aren't dramatic. They're just unsettling, and that simplicity made them powerful."</p>
+                <p class="review-quote">"I'd recommend this memoir to anyone who wants to understand autoimmune disease beyond medical definitions, and to readers who appreciate raw, unfiltered life narratives. It's especially powerful for anyone who's been dismissed by doctors or felt lost in a system that values test results over lived experience."</p>
+                <a href="https://literarytitan.com/2025/11/27/just-another-statistic/" class="review-link" target="_blank">Read the full review →</a>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-source">Author Interview: "Cheated By The System"</div>
+                </div>
+                <p class="review-quote">"I felt cheated by the system. The doctors colluded despite overwhelming evidence... Writing this book became essential because the story needed to be told, but not just mine. Thousands of patients go through this same pattern of dismissal and misdiagnosis."</p>
+                <p class="review-quote">"Writing about it now has been harder than I expected. Reliving the experience and the frustration - knowing the doctors involved faced no accountability - still makes me furious... However, I never agreed not to write about it. They probably didn't worry about that anyway - my life expectancy was supposed to be short."</p>
+                <a href="https://literarytitan.com/2025/11/28/cheated-by-the-system/" class="review-link" target="_blank">Read the full interview →</a>
+            </div>
+        </div>
+        
+        <!-- Lupus Diagnostic Education Group Section -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 80px 20px; margin: 60px 0; border-radius: 20px; text-align: center; box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <h2 style="font-size: 2.8em; margin-bottom: 25px; color: white;">Join the Movement</h2>
+                <div style="font-size: 1.5em; line-height: 1.6; margin-bottom: 30px; color: rgba(255,255,255,0.95);">
+                    <p style="margin-bottom: 20px;"><strong>After 18 months of misdiagnosis IN HOSPITAL</strong> with textbook lupus symptoms, I realised something:</p>
+                    <p style="margin-bottom: 20px;">We're teaching patients to recognise lupus.<br>But patients already KNOW something's wrong.</p>
+                    <p style="margin-bottom: 30px;"><strong>We need to teach DOCTORS to recognise it earlier.</strong></p>
+                </div>
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 40px; border-radius: 15px; margin-bottom: 30px;">
+                    <h3 style="font-size: 2em; margin-bottom: 20px; color: white;">Lupus Diagnostic Education</h3>
+                    <p style="font-size: 1.2em; line-height: 1.6; margin-bottom: 25px; color: rgba(255,255,255,0.9);">
+                        A Facebook group where patients share diagnostic delay case studies and medical professionals learn what textbooks miss.
+                    </p>
+                    <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; font-size: 1.1em;">
+                        <div>📋 <strong>Patients:</strong> Share your story</div>
+                        <div>🩺 <strong>Doctors:</strong> Learn what you're missing</div>
+                        <div>🔬 <strong>Together:</strong> Reduce diagnostic delays</div>
+                    </div>
+                    <p style="font-size: 1.1em; color: rgba(255,255,255,0.85); margin-bottom: 30px;"><em>This is NOT a support group - it's an educational space to create systemic change</em></p>
+                </div>
+                <a href="https://www.facebook.com/groups/26013123418305423/" target="_blank" style="display: inline-block; background: white; color: #667eea; padding: 25px 60px; font-size: 1.4em; text-decoration: none; border-radius: 50px; font-weight: bold; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">Join the Group</a>
+                <p style="margin-top: 20px; font-size: 1.1em; color: rgba(255,255,255,0.8);">Help improve medical education and reduce the 6-year average diagnostic delay</p>
+            </div>
+        </div>
+        
+        <div class="about-author">
+            <h2>About the Author</h2>
+            <p>Axel Reid is a former London currency trader who survived systemic lupus and medical negligence. After years battling both the disease and the healthcare system, Reid transformed personal tragedy into advocacy, writing this memoir to help others recognize the signs of autoimmune disease and navigate medical failures.</p>
+            
+            <p>Written while still experiencing the cognitive effects of lupus, this memoir doesn't just describe the illness—it captures what it feels like to think with a brain under attack.</p>
+        </div>
+    </div>
+</body>
+</html>

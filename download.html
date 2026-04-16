@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>Free Lupus Case Study — Axel Reid</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -81,6 +82,19 @@
             font-weight: bold;
         }
 
+        .mobile-tip {
+            background: #f8f9ff;
+            border: 1px solid #e0e4ff;
+            border-radius: 10px;
+            padding: 10px 16px;
+            margin-bottom: 16px;
+            font-family: Arial, sans-serif;
+            font-size: 0.82em;
+            color: #555;
+            line-height: 1.5;
+            display: none;
+        }
+
         .download-btn {
             display: block;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -118,6 +132,11 @@
         }
 
         .back-link:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .mobile-tip { display: block; }
+            .card { padding: 36px 24px; }
+        }
     </style>
 </head>
 <body>
@@ -139,9 +158,16 @@
             <p>Learning points for clinicians, students and patient advocates</p>
         </div>
 
-      <a href="https://notanotherstatistic.com/lupus_misdiagnosis_case_study.pdf" target="_blank" rel="noopener noreferrer" class="download-btn">
-  ⬇ Download the Case Study — Free
-</a>
+        <div class="mobile-tip">
+            📱 If the download doesn't open, tap the three dots menu in your browser and select <strong>"Open in browser"</strong> — then try again.
+        </div>
+
+        <a href="https://notanotherstatistic.com/lupus_misdiagnosis_case_study.pdf" 
+           target="_blank" 
+           rel="noreferrer"
+           class="download-btn">
+          ⬇ Download the Case Study — Free
+        </a>
 
         <p class="note">PDF · Free to share for medical education and patient advocacy · All individuals anonymised</p>
 
